@@ -13,7 +13,6 @@ export default function Step1({ fields, errors, set }) {
             onChange={v => set('schoolName', v)}
             placeholder="e.g. Forest Hills Central High School"
             error={errors.schoolName}
-            onClearError={() => set('schoolName', fields.schoolName)}
           />
           {errors.schoolName && <FieldError message="please enter your school's name to continue." />}
         </div>

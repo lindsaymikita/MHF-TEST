@@ -230,7 +230,7 @@ export function FieldLabel({ children, required, optional }) {
   )
 }
 
-export function TextInput({ value, onChange, placeholder, type = 'text', error, onClearError }) {
+export function TextInput({ value, onChange, placeholder, type = 'text', error }) {
   const [focus, setFocus] = useState(false)
   const base = 'font-size:15px; color:#424242; background:#fff; border-radius:6px; padding:12px 14px; outline:none; width:100%;'
   let border = error ? '1.5px solid #fb6619' : focus ? '1.5px solid #8dc640' : '1.5px solid rgba(66,66,66,0.18)'
@@ -240,7 +240,7 @@ export function TextInput({ value, onChange, placeholder, type = 'text', error, 
     <input
       type={type}
       value={value}
-      onChange={e => { onChange(e.target.value); if (onClearError) onClearError() }}
+      onChange={e => onChange(e.target.value)}
       placeholder={placeholder}
       onFocus={() => setFocus(true)}
       onBlur={() => setFocus(false)}
