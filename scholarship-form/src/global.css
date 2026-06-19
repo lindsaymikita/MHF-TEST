@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: 'Jost', 'Century Gothic', 'URW Gothic', 'Avant Garde', system-ui, sans-serif; }
+input::placeholder, textarea::placeholder { color: #b3b1a4; }
+input, textarea, button { font-family: inherit; }
