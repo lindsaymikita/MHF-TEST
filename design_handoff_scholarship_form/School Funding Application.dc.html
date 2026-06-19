@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    input::placeholder, textarea::placeholder { color: #b3b1a4; }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; background:#fbf9de; font-family:'Jost','Century Gothic',system-ui,sans-serif; color:#424242; padding:48px 24px; display:flex; justify-content:center;">
+  <div style="width:100%; max-width:760px;">
+
+    <!-- wordmark -->
+    <div style="display:flex; align-items:baseline; gap:2px; margin-bottom:40px; font-weight:700; letter-spacing:-0.02em; font-size:26px; line-height:1;">
+      <span style="color:#8dc640;">be nice</span><span style="color:#ec068d;">.</span>
+    </div>
+
+    <!-- ============ SUCCESS ============ -->
+    <sc-if value="{{ isSubmitted }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#ffffff; border-radius:20px; box-shadow:0 12px 32px rgba(66,66,66,0.10); padding:64px 48px; text-align:center;">
+      <div style="width:64px; height:64px; border-radius:999px; background:#8dc640; color:#fbf9de; font-size:32px; font-weight:700; display:flex; align-items:center; justify-content:center; margin:0 auto 24px;">✓</div>
+      <h1 style="margin:0 0 14px; font-weight:700; text-transform:lowercase; letter-spacing:-0.02em; font-size:36px; color:#8dc640;">thank you — your application is in.</h1>
+      <p style="margin:0 auto; max-width:46ch; font-size:16px; line-height:1.6; color:#424242;">we've received your scholarship application. our team will review it and reach out to your primary contact within two weeks. thank you for working to build a psychologically safer community.</p>
+    </div>
+    </sc-if>
+
+    <!-- ============ FORM ============ -->
+    <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#ffffff; border-radius:20px; box-shadow:0 12px 32px rgba(66,66,66,0.10); overflow:hidden;">
+
+      <!-- header band -->
+      <div style="padding:40px 48px 32px; border-bottom:1.5px solid rgba(66,66,66,0.10);">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <span style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#898989;">scholarship application</span>
+          <span style="height:4px; width:4px; border-radius:999px; background:#898989; display:inline-block;"></span>
+          <span style="font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#8dc640;">page {{ pageLabel }}</span>
+        </div>
+        <h1 style="margin:0 0 12px; font-weight:700; text-transform:lowercase; letter-spacing:-0.02em; line-height:1.05; font-size:40px; color:#8dc640;">school funding application</h1>
+        <p style="margin:0; max-width:52ch; font-size:16px; line-height:1.6; color:#424242;">{{ intro }}</p>
+        <div style="display:flex; gap:8px; margin-top:28px;">
+          <div style="{{ seg1Style }}"></div>
+          <div style="{{ seg2Style }}"></div>
+          <div style="{{ seg3Style }}"></div>
+        </div>
+      </div>
+
+      <!-- ============ PAGE 1 ============ -->
+      <sc-if value="{{ isPage1 }}" hint-placeholder-val="{{ true }}">
+      <div style="padding:40px 48px 8px;">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:28px;">
+          <div style="flex:none; width:34px; height:34px; border-radius:999px; background:#8dc640; color:#fbf9de; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center;">1</div>
+          <h2 style="margin:0; font-weight:700; text-transform:lowercase; letter-spacing:-0.02em; font-size:24px; color:#898989;">school information</h2>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:22px;">
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242; display:flex; align-items:center; gap:5px;">school name <span style="color:#ec068d; font-weight:700;">*</span></label>
+            <input value="{{ schoolName }}" onChange="{{ onSchoolName }}" placeholder="e.g. Forest Hills Central High School" style="{{ schoolNameStyle }}" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+            <sc-if value="{{ schoolNameError }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12px; color:#fb6619; font-weight:500;">please enter your school's name to continue.</div>
+            </sc-if>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">school district</label>
+            <input placeholder="e.g. Forest Hills Public Schools" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">school address</label>
+            <input placeholder="street, city, state, zip" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px;">
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">primary contact name</label>
+              <input placeholder="first and last name" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">title / role</label>
+              <input placeholder="e.g. school counselor" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+            </div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px;">
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">email address</label>
+              <input type="email" placeholder="name@school.org" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">phone number</label>
+              <input type="tel" placeholder="(000) 000-0000" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242; display:flex; align-items:center; gap:8px;">principal / superintendent name <span style="font-size:11px; font-weight:500; text-transform:lowercase; color:#898989;">optional, but helpful</span></label>
+            <input placeholder="first and last name" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ PAGE 2 ============ -->
+      <sc-if value="{{ isPage2 }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:40px 48px 8px;">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:28px;">
+          <div style="flex:none; width:34px; height:34px; border-radius:999px; background:#8dc640; color:#fbf9de; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center;">2</div>
+          <h2 style="margin:0; font-weight:700; text-transform:lowercase; letter-spacing:-0.02em; font-size:24px; color:#898989;">school need</h2>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:26px;">
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label style="font-size:15px; font-weight:700; text-transform:lowercase; color:#424242;">tell us about your school community.</label>
+            <p style="margin:0; font-size:13px; line-height:1.55; color:#898989;">a short paragraph is plenty. you might touch on:</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin:2px 0 4px;">
+              <span style="font-size:12px; font-weight:500; color:#6fa12d; background:#f1f7e4; border-radius:999px; padding:5px 12px;">student population</span>
+              <span style="font-size:12px; font-weight:500; color:#6fa12d; background:#f1f7e4; border-radius:999px; padding:5px 12px;">community characteristics</span>
+              <span style="font-size:12px; font-weight:500; color:#6fa12d; background:#f1f7e4; border-radius:999px; padding:5px 12px;">mental health challenges being observed</span>
+              <span style="font-size:12px; font-weight:500; color:#6fa12d; background:#f1f7e4; border-radius:999px; padding:5px 12px;">why the program is needed</span>
+            </div>
+            <textarea rows="5" placeholder="share a little about the students and community you serve…" style="font-family:inherit; font-size:15px; line-height:1.55; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%; resize:vertical;" style-focus="font-family:inherit; font-size:15px; line-height:1.55; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; width:100%; resize:vertical; box-shadow:0 0 0 3px rgba(141,198,64,0.35);"></textarea>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px; background:#fdf1f8; border:1.5px solid rgba(236,6,141,0.18); border-radius:12px; padding:20px;">
+            <label style="font-size:15px; font-weight:700; text-transform:lowercase; color:#424242; display:flex; align-items:center; gap:5px;">why are you seeking funding assistance? <span style="color:#ec068d; font-weight:700;">*</span></label>
+            <p style="margin:0; font-size:13px; line-height:1.55; color:#c4047a; font-weight:600;">this is often the most important question — take your time with it.</p>
+            <textarea value="{{ fundingReason }}" onChange="{{ onFundingReason }}" rows="6" placeholder="tell us, in your own words, why funding support matters for your school…" style="{{ fundingReasonStyle }}" style-focus="font-family:inherit; font-size:15px; line-height:1.55; color:#424242; background:#fff; border:1.5px solid #ec068d; border-radius:6px; padding:12px 14px; outline:none; width:100%; resize:vertical; box-shadow:0 0 0 3px rgba(236,6,141,0.22);"></textarea>
+            <sc-if value="{{ fundingReasonError }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12px; color:#fb6619; font-weight:500;">please share why you're seeking funding before continuing.</div>
+            </sc-if>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label style="font-size:15px; font-weight:700; text-transform:lowercase; color:#424242;">what barriers would prevent implementation without financial support?</label>
+            <p style="margin:0; font-size:13px; line-height:1.55; color:#898989;">a short answer is fine.</p>
+            <textarea rows="3" placeholder="e.g. limited budget for training, staffing, or materials…" style="font-family:inherit; font-size:15px; line-height:1.55; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%; resize:vertical;" style-focus="font-family:inherit; font-size:15px; line-height:1.55; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; width:100%; resize:vertical; box-shadow:0 0 0 3px rgba(141,198,64,0.35);"></textarea>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ============ PAGE 3 ============ -->
+      <sc-if value="{{ isPage3 }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:40px 48px 8px;">
+        <div style="display:flex; align-items:center; gap:14px; margin-bottom:28px;">
+          <div style="flex:none; width:34px; height:34px; border-radius:999px; background:#8dc640; color:#fbf9de; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center;">3</div>
+          <h2 style="margin:0; font-weight:700; text-transform:lowercase; letter-spacing:-0.02em; font-size:24px; color:#898989;">impact &amp; commitment</h2>
+        </div>
+
+        <!-- program impact -->
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8dc640; margin-bottom:18px;">program impact</div>
+        <div style="display:flex; flex-direction:column; gap:22px; margin-bottom:36px;">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px;">
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">approx. students impacted</label>
+              <input type="number" min="0" placeholder="e.g. 850" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">approx. staff participating</label>
+              <input type="number" min="0" placeholder="e.g. 45" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">how will your school use the program? <span style="font-weight:500; color:#898989;">check all that apply</span></label>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <label style="display:flex; align-items:center; gap:10px; font-size:14px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:8px; padding:11px 14px; cursor:pointer;"><input type="checkbox" style="accent-color:#8dc640; width:17px; height:17px; cursor:pointer;" /> classroom instruction</label>
+              <label style="display:flex; align-items:center; gap:10px; font-size:14px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:8px; padding:11px 14px; cursor:pointer;"><input type="checkbox" style="accent-color:#8dc640; width:17px; height:17px; cursor:pointer;" /> assemblies</label>
+              <label style="display:flex; align-items:center; gap:10px; font-size:14px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:8px; padding:11px 14px; cursor:pointer;"><input type="checkbox" style="accent-color:#8dc640; width:17px; height:17px; cursor:pointer;" /> staff training</label>
+              <label style="display:flex; align-items:center; gap:10px; font-size:14px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:8px; padding:11px 14px; cursor:pointer;"><input type="checkbox" style="accent-color:#8dc640; width:17px; height:17px; cursor:pointer;" /> parent engagement</label>
+              <label style="display:flex; align-items:center; gap:10px; font-size:14px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:8px; padding:11px 14px; cursor:pointer;"><input type="checkbox" style="accent-color:#8dc640; width:17px; height:17px; cursor:pointer;" /> student leadership</label>
+              <label style="display:flex; align-items:center; gap:10px; font-size:14px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:8px; padding:11px 14px; cursor:pointer;"><input type="checkbox" style="accent-color:#8dc640; width:17px; height:17px; cursor:pointer;" /> other</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- commitment & readiness -->
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8dc640; margin-bottom:18px; padding-top:8px; border-top:1.5px solid rgba(66,66,66,0.08);">commitment &amp; readiness</div>
+        <div style="display:flex; flex-direction:column; gap:22px; margin-bottom:36px;">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">has school leadership approved participation?</label>
+            <div style="display:flex; gap:10px;">
+              <label style="display:flex; align-items:center; gap:9px; font-size:14px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:999px; padding:10px 20px; cursor:pointer;"><input type="radio" name="leadership-approved" style="accent-color:#8dc640; width:16px; height:16px; cursor:pointer;" /> yes</label>
+              <label style="display:flex; align-items:center; gap:9px; font-size:14px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:999px; padding:10px 20px; cursor:pointer;"><input type="radio" name="leadership-approved" style="accent-color:#8dc640; width:16px; height:16px; cursor:pointer;" /> no</label>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">who will serve as the program champion / coordinator?</label>
+            <input placeholder="name and role" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">describe your implementation plan.</label>
+            <p style="margin:0; font-size:13px; line-height:1.55; color:#898989;">a few sentences — this helps us identify schools that are ready to execute, not just seeking funding.</p>
+            <textarea rows="4" placeholder="how and when will you roll the program out across the school year?" style="font-family:inherit; font-size:15px; line-height:1.55; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%; resize:vertical;" style-focus="font-family:inherit; font-size:15px; line-height:1.55; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; width:100%; resize:vertical; box-shadow:0 0 0 3px rgba(141,198,64,0.35);"></textarea>
+          </div>
+        </div>
+
+        <!-- reporting commitment -->
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8dc640; margin-bottom:18px; padding-top:8px; border-top:1.5px solid rgba(66,66,66,0.08);">reporting commitment</div>
+        <div style="margin-bottom:36px;">
+          <p style="margin:0 0 12px; font-size:14px; color:#424242; font-weight:600;">if awarded funding, our school agrees to:</p>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <label style="display:flex; align-items:flex-start; gap:11px; font-size:14px; line-height:1.45; color:#424242; cursor:pointer;"><input type="checkbox" style="accent-color:#8dc640; width:17px; height:17px; margin-top:2px; cursor:pointer; flex:none;" /> implement the program during the funded school year</label>
+            <label style="display:flex; align-items:flex-start; gap:11px; font-size:14px; line-height:1.45; color:#424242; cursor:pointer;"><input type="checkbox" style="accent-color:#8dc640; width:17px; height:17px; margin-top:2px; cursor:pointer; flex:none;" /> provide a brief year-end impact report</label>
+            <label style="display:flex; align-items:flex-start; gap:11px; font-size:14px; line-height:1.45; color:#424242; cursor:pointer;"><input type="checkbox" style="accent-color:#8dc640; width:17px; height:17px; margin-top:2px; cursor:pointer; flex:none;" /> share participation and outcome information requested by the foundation</label>
+            <label style="display:flex; align-items:flex-start; gap:11px; font-size:14px; line-height:1.45; color:#424242; cursor:pointer;"><input type="checkbox" style="accent-color:#8dc640; width:17px; height:17px; margin-top:2px; cursor:pointer; flex:none;" /> allow anonymized results to be used in donor impact reporting</label>
+          </div>
+        </div>
+
+        <!-- certification -->
+        <div style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#8dc640; margin-bottom:18px; padding-top:8px; border-top:1.5px solid rgba(66,66,66,0.08);">certification</div>
+        <div style="display:flex; flex-direction:column; gap:22px;">
+          <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:18px;">
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">applicant name</label>
+              <input placeholder="first and last name" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">title</label>
+              <input placeholder="role" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:12px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+            </div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <label style="font-size:13px; font-weight:600; text-transform:lowercase; color:#424242;">date</label>
+              <input type="date" style="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:11px 14px; outline:none; width:100%;" style-focus="font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #8dc640; border-radius:6px; padding:11px 14px; outline:none; box-shadow:0 0 0 3px rgba(141,198,64,0.35); width:100%;" />
+            </div>
+          </div>
+          <label style="display:flex; align-items:flex-start; gap:12px; font-size:14px; line-height:1.45; color:#424242; cursor:pointer; background:#f1f7e4; border:1.5px solid {{ certifyBorder }}; border-radius:12px; padding:16px 18px;">
+            <input type="checkbox" checked="{{ certify }}" onChange="{{ onCertify }}" style="accent-color:#8dc640; width:19px; height:19px; margin-top:1px; cursor:pointer; flex:none;" />
+            <span><span style="color:#ec068d; font-weight:700;">*</span> i certify that the information provided is accurate and complete.</span>
+          </label>
+          <sc-if value="{{ certifyError }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12px; color:#fb6619; font-weight:500; margin-top:-12px;">please confirm the certification to submit your application.</div>
+          </sc-if>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- footer -->
+      <div style="padding:32px 48px 40px; margin-top:16px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
+        <sc-if value="{{ isPage1 }}" hint-placeholder-val="{{ true }}">
+          <p style="margin:0; font-size:13px; color:#898989; max-width:38ch;"><span style="color:#ec068d; font-weight:700;">*</span> required. your information is kept confidential.</p>
+        </sc-if>
+        <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ onBack }}" style="font-family:inherit; font-weight:700; text-transform:lowercase; font-size:16px; cursor:pointer; padding:13px 28px; border-radius:999px; letter-spacing:-0.01em; background:transparent; color:#898989; border:1.5px solid rgba(66,66,66,0.18); transition:all 180ms cubic-bezier(.2,0,.2,1);" style-hover="font-family:inherit; font-weight:700; text-transform:lowercase; font-size:16px; cursor:pointer; padding:13px 28px; border-radius:999px; letter-spacing:-0.01em; background:#f4efc6; color:#424242; border:1.5px solid rgba(66,66,66,0.18);">back</button>
+        </sc-if>
+        <button onClick="{{ onContinue }}" style="font-family:inherit; font-weight:700; text-transform:lowercase; font-size:16px; border:none; cursor:pointer; padding:13px 30px; border-radius:999px; letter-spacing:-0.01em; background:#ec068d; color:#fbf9de; transition:all 180ms cubic-bezier(.2,0,.2,1);" style-hover="font-family:inherit; font-weight:700; text-transform:lowercase; font-size:16px; border:none; cursor:pointer; padding:13px 30px; border-radius:999px; letter-spacing:-0.01em; background:#f33ea4; color:#fbf9de; box-shadow:0 4px 12px rgba(236,6,141,0.25);">{{ continueLabel }}</button>
+      </div>
+
+    </div>
+    </sc-if>
+
+    <!-- footnote signature -->
+    <div style="text-align:center; margin-top:28px; font-size:12px; color:#898989;">mental health foundation of west michigan</div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { page: 1, schoolName: '', schoolNameError: false, fundingReason: '', fundingReasonError: false, certify: false, certifyError: false, submitted: false };
+
+  renderVals() {
+    const p = this.state.page;
+    const baseInput = "font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid rgba(66,66,66,0.18); border-radius:6px; padding:12px 14px; outline:none; width:100%;";
+    const errorInput = "font-family:inherit; font-size:15px; color:#424242; background:#fff; border:1.5px solid #fb6619; border-radius:6px; padding:12px 14px; outline:none; width:100%;";
+    const baseTa = "font-family:inherit; font-size:15px; line-height:1.55; color:#424242; background:#fff; border:1.5px solid rgba(236,6,141,0.30); border-radius:6px; padding:12px 14px; outline:none; width:100%; resize:vertical;";
+    const errorTa = "font-family:inherit; font-size:15px; line-height:1.55; color:#424242; background:#fff; border:1.5px solid #fb6619; border-radius:6px; padding:12px 14px; outline:none; width:100%; resize:vertical;";
+    const segGreen = "flex:1; height:6px; border-radius:999px; background:#8dc640;";
+    const segDim = "flex:1; height:6px; border-radius:999px; background:#f4efc6;";
+
+    const intros = {
+      1: "we use this application to find schools that are the right fit — and have the resources — to bring a proactive mental health program to their community. let's start with the basics.",
+      2: "this section helps us understand the students you serve and why funding support would make a difference.",
+      3: "finally, tell us about the reach of the program at your school, your readiness to implement, and your reporting commitment.",
+    };
+    const labels = { 1: "continue", 2: "save & continue", 3: "submit application" };
+
+    return {
+      notSubmitted: !this.state.submitted,
+      isSubmitted: this.state.submitted,
+      isPage1: p === 1,
+      isPage2: p === 2,
+      isPage3: p === 3,
+      showBack: p > 1,
+      pageLabel: p + " of 3",
+      intro: intros[p],
+      continueLabel: labels[p],
+      seg1Style: segGreen,
+      seg2Style: p >= 2 ? segGreen : segDim,
+      seg3Style: p >= 3 ? segGreen : segDim,
+
+      schoolName: this.state.schoolName,
+      schoolNameError: this.state.schoolNameError,
+      schoolNameStyle: this.state.schoolNameError ? errorInput : baseInput,
+      onSchoolName: (e) => this.setState({ schoolName: e.target.value, schoolNameError: false }),
+
+      fundingReason: this.state.fundingReason,
+      fundingReasonError: this.state.fundingReasonError,
+      fundingReasonStyle: this.state.fundingReasonError ? errorTa : baseTa,
+      onFundingReason: (e) => this.setState({ fundingReason: e.target.value, fundingReasonError: false }),
+
+      certify: this.state.certify,
+      certifyError: this.state.certifyError,
+      certifyBorder: this.state.certifyError ? "#fb6619" : "rgba(141,198,64,0.45)",
+      onCertify: (e) => this.setState({ certify: e.target.checked, certifyError: false }),
+
+      onBack: () => { this.setState({ page: Math.max(1, this.state.page - 1) }); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      onContinue: () => {
+        if (this.state.page === 1) {
+          if (!this.state.schoolName.trim()) { this.setState({ schoolNameError: true }); return; }
+          this.setState({ page: 2 }); window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (this.state.page === 2) {
+          if (!this.state.fundingReason.trim()) { this.setState({ fundingReasonError: true }); return; }
+          this.setState({ page: 3 }); window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          if (!this.state.certify) { this.setState({ certifyError: true }); return; }
+          this.setState({ submitted: true }); window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
